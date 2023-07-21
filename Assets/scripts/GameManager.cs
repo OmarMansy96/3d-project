@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     Plane plane = new Plane(Vector3.forward,0);
     public Transform target;
     public float ballSpeed;
-    public GameObject newBall;
+    private GameObject newBall;
     bool ballReady;
     void Start()
     {
@@ -19,8 +19,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+
         Vector3 dir = target.position - ball.transform.position;
-        if (Input.GetMouseButtonDown(0)&& ballReady)
+        if (Input.GetMouseButtonDown(0))
+        {
+            newBall.GetComponent<Animator>().enabled = false;
+        }
+        if (Input.GetMouseButtonUp(0)&& ballReady)
         {
             newBall.GetComponent<Rigidbody>().AddForce(dir * ballSpeed, ForceMode.Impulse);
 
